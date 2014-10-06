@@ -1,6 +1,7 @@
 {
   "name": "ember-inject-script",
-  "version": "0.0.0",
+  "description": "inject 3rd party scripts into your ember-cli apps",
+  "version": "0.0.1",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -10,11 +11,14 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "https://github.com/stefanpenner/ember-cli",
+  "repository": "https://github.com/minutebase/ember-load-script",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": {
+    "name": "Richard Livsey",
+    "email": "richard@minutebase.com"
+  },
   "license": "MIT",
   "devDependencies": {
     "body-parser": "^1.2.0",
@@ -30,7 +34,7 @@
     "glob": "^4.0.5"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon", "inject script"
   ],
   "ember-addon": {
     "configPath": "tests/dummy/config"
