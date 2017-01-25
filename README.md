@@ -14,7 +14,7 @@ npm install --save-dev ember-inject-script
 
 For example, lets configure Typekit.
 
-`loadScript` returns a promise, so we can simply load in the Typekit JS and, when it's ready, call `Typekit.load()`:
+`loadScript` returns a promise, so we can simply load in the Typekit JS and, when it's ready, call `Typekit.load()`. If an error occurs fetching the script, we can catch the error and handle it:
 
 ```javascript
 /* global Typekit */
@@ -24,11 +24,11 @@ import config from 'your-app/config/environment';
 
 export default {
   name: 'typekit',
-  initialize: function() {
-    var url = "//use.typekit.net/"+config.typekitID+".js";
-    injectScript(url).then(function() {
-      Typekit.load();
-    });
+  initialize() {
+    let url = "//use.typekit.net/"+config.typekitID+".js";
+    injectScript(url)
+      .then(() => Typekit.load())
+      .catch((error) => this.handleError(error));
   }
 };
 ```

@@ -1,12 +1,26 @@
 import Ember from 'ember';
 
-export default function injectScript(src) {
-  return new Ember.RSVP.Promise(function(resolve) {
-    var script    = document.createElement('script');
-    script.type   = 'text/javascript';
-    script.async  = true;
-    script.src    = src;
-    script.onload = function() { resolve(); };
-    document.getElementsByTagName('head')[0].appendChild(script);
+let removeListenersAndElement = function(element) {
+  Ember.$(element).off('load');
+  Ember.$(element).off('error');
+  element.parentNode.removeChild(element);
+};
+
+export default function(url) {
+  return new Ember.RSVP.Promise((resolve, reject) => {
+    let script = document.createElement('script');
+    document.head.appendChild(script);
+    Ember.$(script).on('load', () => {
+      removeListenersAndElement(script);
+      resolve();
+    });
+    Ember.$(script).on('error', (error) => {
+      removeListenersAndElement(script);
+      reject(error);
+    });
+    script.asnyc = true;
+    script.type = 'text/javascript';
+    script.classList.add('test__promise-script');
+    script.src = url;
   });
 }
