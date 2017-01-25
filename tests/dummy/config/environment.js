@@ -4,22 +4,16 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'dummy',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/',
     locationType: 'auto',
-
-    contentSecurityPolicy: {
-      'default-src': "https://cdn.firebase.com",
-      'script-src':  "'self' 'unsafe-eval' https://cdn.firebase.com",
-      'connect-src': "'self'",
-      'img-src':     "'self'",
-      'style-src':   "'self'",
-      'font-src':    "'self'"
-    },
-
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
+      },
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
       }
     },
 
@@ -39,7 +33,6 @@ module.exports = function(environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/';
     ENV.locationType = 'none';
 
     // keep test console output quieter
